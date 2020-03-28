@@ -90,7 +90,7 @@ public class Player : MonoBehaviour
 
         if(isDrifting)
         {
-            tempPushForce *= 0.5f;
+            tempPushForce *= 0.25f;
         }
 
         trolleyRb.AddForce(transform.up * movement.y * tempPushForce);
