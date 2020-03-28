@@ -55,6 +55,31 @@ public class Player : MonoBehaviour
             trolley.StopDrifting();
             isDrifting = false;
         }
+
+        if(Input.GetKeyDown(KeyCode.E))
+        {
+            // Get food in radius of player 'person'
+            Collider2D[] foods = Physics2D.OverlapCircleAll(transform.position, 2f, LayerMask.GetMask("Food"));
+
+            if (foods.Length > 0)
+            {
+                GameObject closest = foods[0].gameObject;
+                float bestDist = 999999f;
+                foreach (Collider2D food in foods)
+                {
+                    float dist = Vector3.Distance(transform.position, food.transform.position);
+                    if (dist < bestDist)
+                    {
+                        bestDist = dist;
+                        closest = food.gameObject;
+                    }
+                }
+
+                Destroy(closest.GetComponent<Collider2D>());
+                trolley.AddItem(closest);
+                trolleyRb.mass += 0.05f;
+            }
+        }
     }
 
     private void FixedUpdate()
@@ -75,5 +100,11 @@ public class Player : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         AudioManager.PlayOnce(crashClip);
+        Camera.main.GetComponent<CameraShake>().IsShaking = true;
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawWireSphere(transform.position, 2f);
     }
 }
