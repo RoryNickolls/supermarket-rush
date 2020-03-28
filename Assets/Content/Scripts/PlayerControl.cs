@@ -14,18 +14,31 @@ public class PlayerControl : MonoBehaviour
     [SerializeField]
     private float brakeForce;
 
-    private Rigidbody2D trolley;
+    [SerializeField]
+    private AudioClip crashClip;
 
-    private Vector3 movement;
+    private Rigidbody2D trolley;
+    private AudioSource audioSource;
 
     private void Start()
     {
         trolley = GetComponent<Rigidbody2D>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     private void Update()
     {
-        
+        float stopping = 0.1f;
+        float speed = trolley.velocity.magnitude;
+        if(Input.GetAxis("Vertical") >= stopping && !audioSource.isPlaying)
+        {
+            audioSource.Play();
+  
+        } 
+        else if(Input.GetAxis("Vertical") < stopping) 
+        {
+            audioSource.Stop();
+        }
     }
 
     private void FixedUpdate()
@@ -39,5 +52,10 @@ public class PlayerControl : MonoBehaviour
         } 
         trolley.AddForce(transform.up * movement.y * tempPushForce);
         trolley.AddTorque(-movement.x * turnForce);
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        AudioManager.PlayOnce(crashClip);
     }
 }
