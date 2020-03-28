@@ -20,10 +20,15 @@ public class Player : MonoBehaviour
     [SerializeField]
     private Trolley trolley;
 
+    [SerializeField]
+    private AudioClip pickUpClip;
+
     private Rigidbody2D trolleyRb;
     private AudioSource audioSource;
 
     private bool isDrifting = false;
+
+    private Item closestItem;
 
     private void Start()
     {
@@ -56,29 +61,50 @@ public class Player : MonoBehaviour
             isDrifting = false;
         }
 
-        if(Input.GetKeyDown(KeyCode.E))
+        Collider2D[] foods = Physics2D.OverlapCircleAll(transform.position, 2f, LayerMask.GetMask("Food"));
+
+        if (foods.Length > 0)
         {
-            // Get food in radius of player 'person'
-            Collider2D[] foods = Physics2D.OverlapCircleAll(transform.position, 2f, LayerMask.GetMask("Food"));
+            Item closest = foods[0].GetComponent<Item>();
 
-            if (foods.Length > 0)
+            float bestDist = 999999f;
+            foreach (Collider2D food in foods)
             {
-                GameObject closest = foods[0].gameObject;
-                float bestDist = 999999f;
-                foreach (Collider2D food in foods)
+                float dist = Vector3.Distance(transform.position, food.transform.position);
+                if (dist < bestDist)
                 {
-                    float dist = Vector3.Distance(transform.position, food.transform.position);
-                    if (dist < bestDist)
-                    {
-                        bestDist = dist;
-                        closest = food.gameObject;
-                    }
+                    bestDist = dist;
+                    closest = food.GetComponent<Item>();
                 }
-
-                Destroy(closest.GetComponent<Collider2D>());
-                trolley.AddItem(closest);
-                trolleyRb.mass += 0.05f;
             }
+
+            if(closest != closestItem && closestItem != null)
+            {
+                closestItem.StopHighlight();
+            }
+            closestItem = closest;
+            closestItem.Highlight();
+
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                // Get food in radius of player 'person'
+                Destroy(closestItem.GetComponent<Collider2D>());
+                trolley.AddItem(closestItem.gameObject);
+                trolleyRb.mass += 0.05f;
+
+                AudioManager.PlayOnce(pickUpClip);
+
+                closestItem.StopHighlight();
+                closestItem = null;
+            }
+        }
+        else
+        {
+            if (closestItem != null)
+            {
+                closestItem.StopHighlight();
+            }
+            closestItem = null;
         }
     }
 
