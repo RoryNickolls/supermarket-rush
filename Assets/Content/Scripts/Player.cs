@@ -42,21 +42,36 @@ public class Player : MonoBehaviour
 
     private Item closestItem;
 
+    private GameController gameController;
+
     private void Start()
     {
         trolleyRb = GetComponent<Rigidbody2D>();
         audioSource = GetComponent<AudioSource>();
+
+        gameController = FindObjectOfType<GameController>();
     }
 
     private void Update()
     {
+        if(!gameController.HasStarted)
+        {
+            return;
+        }
+
+        HandleMovement();
+        CheckNearbyItems();
+    }
+
+    private void HandleMovement()
+    {
         float stopping = 0.1f;
-        float speed = trolleyRb.velocity.magnitude;
-        if(Input.GetAxis("Vertical") >= stopping && !audioSource.isPlaying)
+        float vInput = Input.GetAxis("Vertical");
+        if (vInput >= stopping && !audioSource.isPlaying)
         {
             audioSource.Play();
-        } 
-        else if(Input.GetAxis("Vertical") < stopping) 
+        }
+        else if (vInput < stopping)
         {
             audioSource.Stop();
         }
@@ -76,6 +91,10 @@ public class Player : MonoBehaviour
 
             trolleyRb.AddForce(transform.up * driftBoost, ForceMode2D.Impulse);
         }
+    }
+
+    private void CheckNearbyItems()
+    {
 
         Collider2D[] foods = Physics2D.OverlapCircleAll(transform.position, 2f, LayerMask.GetMask("Food"));
 
@@ -94,7 +113,7 @@ public class Player : MonoBehaviour
                 }
             }
 
-            if(closest != closestItem && closestItem != null)
+            if (closest != closestItem && closestItem != null)
             {
                 closestItem.StopHighlight();
             }
@@ -126,6 +145,11 @@ public class Player : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if(!gameController.HasStarted)
+        {
+            return;
+        }
+
         Vector3 movement = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
 
         float tempPushForce = movement.y < 0 ? brakeForce : pushForce;
