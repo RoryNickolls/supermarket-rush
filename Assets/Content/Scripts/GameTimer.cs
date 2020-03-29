@@ -16,7 +16,7 @@ public class GameTimer : MonoBehaviour
     {
         // Every second
         timer += Time.deltaTime;
-        if(timer >= 1.0f)
+        if(HasTimeLeft && timer >= 1.0f)
         {
             seconds--;
             UpdateGameTime();
@@ -42,6 +42,14 @@ public class GameTimer : MonoBehaviour
     private void UpdateGameTime()
     {
         GetComponentInChildren<Text>().text = RemainingToString();
+    }
+
+    public bool HasTimeLeft
+    {
+        get
+        {
+            return seconds > 0;
+        }
     }
 
 }
