@@ -1,16 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class GameTimer : MonoBehaviour
 {
+    [SerializeField]
+    private UnityEvent onFinish;
 
     [SerializeField]
     private int seconds;
 
     private float timer = 0.0f;
-
 
     private void Update()
     {
@@ -21,6 +23,12 @@ public class GameTimer : MonoBehaviour
             seconds--;
             UpdateGameTime();
             timer = 0.0f;
+        }
+
+        if(!HasTimeLeft)
+        {
+            onFinish.Invoke();
+            enabled = false;
         }
     }
 
