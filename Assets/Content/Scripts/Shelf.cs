@@ -6,6 +6,9 @@ public class Shelf : MonoBehaviour
     [SerializeField]
     private ItemGroup itemGroup;
 
+    [SerializeField]
+    private float spawnChance = 0.75f;
+
     private Transform[] itemPositions;
 
     private void Start()
@@ -19,7 +22,7 @@ public class Shelf : MonoBehaviour
     {
         foreach(Transform pos in itemPositions)
         {
-            if (pos == transform)
+            if (pos == transform || Random.Range(0.0f, 1.0f) > spawnChance)
                 continue;
 
             Item item = ItemManager.Instance.GetRandomItem(itemGroup);

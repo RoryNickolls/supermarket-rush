@@ -17175,6 +17175,11 @@ PrefabInstance:
       propertyPath: itemGroup
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7882869646678039435, guid: 16e0b719d1caecf4e8f505a645904e46,
+        type: 3}
+      propertyPath: spawnChance
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 16e0b719d1caecf4e8f505a645904e46, type: 3}
 --- !u!1 &1089294858
@@ -18357,6 +18362,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Shelf (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7882869646678039435, guid: 16e0b719d1caecf4e8f505a645904e46,
+        type: 3}
+      propertyPath: spawnChance
+      value: 0.1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 16e0b719d1caecf4e8f505a645904e46, type: 3}
