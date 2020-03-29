@@ -173,7 +173,7 @@ public class Player : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         AudioManager.PlayOnce(crashClip);
-        Camera.main.GetComponent<CameraShake>().IsShaking = true;
+        Camera.main.GetComponent<CameraShake>().Shake();
     }
 
     private void OnDrawGizmos()

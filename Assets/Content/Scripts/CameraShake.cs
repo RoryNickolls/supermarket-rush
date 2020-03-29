@@ -5,10 +5,14 @@ using UnityEngine;
 public class CameraShake : MonoBehaviour
 {
     [SerializeField]
-    private float shakeAmplitude = 0.25f;
+    private float defaultAmplitude = 0.25f;
 
     [SerializeField]
-    private float shakeDuration = 0.1f;
+    private float defaultDuration = 0.1f;
+
+    private float amplitude;
+    private float duration;
+
     private float shakeTimer = 0.0f;
 
     private bool isShaking = false;
@@ -21,9 +25,9 @@ public class CameraShake : MonoBehaviour
 
     private void Update()
     {
-        if(shakeTimer <= shakeDuration && isShaking)
+        if(shakeTimer <= duration && isShaking)
         {
-            transform.position = original + (Vector3)Random.insideUnitCircle * shakeAmplitude;
+            transform.position = original + (Vector3)Random.insideUnitCircle * amplitude;
             shakeTimer += Time.deltaTime;
         }
         else
@@ -32,16 +36,20 @@ public class CameraShake : MonoBehaviour
             isShaking = false;
         }
     }
-
-    public bool IsShaking
+    
+    public void Shake(float length, float amplitude)
     {
-        get { return isShaking; }
-        set { 
-            isShaking = value;
-            if(isShaking)
-            {
-                shakeTimer = 0.0f;
-            }
-        }
+        shakeTimer = 0.0f;
+        this.amplitude = amplitude;
+        this.duration = length;
+        isShaking = true;
+    }
+
+    public void Shake()
+    {
+        shakeTimer = 0.0f;
+        duration = defaultDuration;
+        amplitude = defaultAmplitude;
+        isShaking = true;
     }
 }

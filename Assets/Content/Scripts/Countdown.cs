@@ -76,7 +76,7 @@ public class Countdown : MonoBehaviour
             elapsed += Time.deltaTime;
             yield return null;
         }
-        Camera.main.GetComponent<CameraShake>().IsShaking = true;
+        Camera.main.GetComponent<CameraShake>().Shake();
 
         if(remaining == 0)
         {
