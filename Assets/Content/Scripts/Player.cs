@@ -15,6 +15,12 @@ public class Player : MonoBehaviour
     private float brakeForce;
 
     [SerializeField]
+    private float driftMultiplier = 0.4f;
+
+    [SerializeField]
+    private float driftBoost = 15f;
+
+    [SerializeField]
     private AudioClip crashClip;
 
     [SerializeField]
@@ -59,6 +65,8 @@ public class Player : MonoBehaviour
         {
             trolley.StopDrifting();
             isDrifting = false;
+
+            trolleyRb.AddForce(transform.up * driftBoost, ForceMode2D.Impulse);
         }
 
         Collider2D[] foods = Physics2D.OverlapCircleAll(transform.position, 2f, LayerMask.GetMask("Food"));
@@ -116,7 +124,7 @@ public class Player : MonoBehaviour
 
         if(isDrifting)
         {
-            tempPushForce *= 0.25f;
+            tempPushForce *= driftMultiplier;
         }
 
         trolleyRb.AddForce(transform.up * movement.y * tempPushForce);

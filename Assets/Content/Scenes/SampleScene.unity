@@ -16495,6 +16495,8 @@ MonoBehaviour:
   pushForce: 12
   turnForce: 8
   brakeForce: 7
+  driftMultiplier: 0.5
+  driftBoost: 15
   crashClip: {fileID: 8300000, guid: 880a31d5d6f967942b8a68c27501f9e5, type: 3}
   trolley: {fileID: 1568694035}
   pickUpClip: {fileID: 8300000, guid: fe9b72e9fe0936c418d73b0582a81ab3, type: 3}
