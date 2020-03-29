@@ -16341,6 +16341,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Shelf (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 7882869646678039435, guid: 16e0b719d1caecf4e8f505a645904e46,
+        type: 3}
+      propertyPath: itemGroup
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 16e0b719d1caecf4e8f505a645904e46, type: 3}
 --- !u!1 &1089294858
@@ -16497,7 +16502,9 @@ MonoBehaviour:
   brakeForce: 7
   driftMultiplier: 0.5
   driftBoost: 15
+  moveClip: {fileID: 8300000, guid: 50fe85aba269bb448b7aae5ee8491440, type: 3}
   crashClip: {fileID: 8300000, guid: 880a31d5d6f967942b8a68c27501f9e5, type: 3}
+  driftClip: {fileID: 8300000, guid: aa31b61617dc76e4e8ad8b9a897cda6a, type: 3}
   trolley: {fileID: 1568694035}
   pickUpClip: {fileID: 8300000, guid: fe9b72e9fe0936c418d73b0582a81ab3, type: 3}
 --- !u!82 &1121717932
@@ -17304,6 +17311,24 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 54c5e6a3843878e44bd6bd92faf34ce5, type: 2}
   - {fileID: 11400000, guid: 472a2eaa570839b4d9130b52284bd2a2, type: 2}
   - {fileID: 11400000, guid: fcb7234594991094c9522310b31cc58e, type: 2}
+  - {fileID: 11400000, guid: d5193649dae54e641afbccc95306e024, type: 2}
+  - {fileID: 11400000, guid: de718499a84957542b39b1ebfc69d41a, type: 2}
+  - {fileID: 11400000, guid: c11e6030eb44ac44d9d445e7709ed39d, type: 2}
+  - {fileID: 11400000, guid: 09dd120fa421d4044b07f88305b58ff9, type: 2}
+  - {fileID: 11400000, guid: 1fe42188d056e1c4b8c30abe7cc002fa, type: 2}
+  - {fileID: 11400000, guid: b26f0730d3ba1f448aaa4b84bc59c054, type: 2}
+  - {fileID: 11400000, guid: 67faafa04d5cd36489f66caeb7ad0980, type: 2}
+  - {fileID: 11400000, guid: d4e8baaffb4627240a10cc089e0b55e0, type: 2}
+  - {fileID: 11400000, guid: de3585d70179c85488ecd6c61e02c65e, type: 2}
+  - {fileID: 11400000, guid: ee7c8e42800c4a9478ad033bd9fcb0cc, type: 2}
+  - {fileID: 11400000, guid: b47803e0c9f4494478393a93299537a8, type: 2}
+  - {fileID: 11400000, guid: 6a51ae5a58a2ba94d8a3d0abf67a8ed2, type: 2}
+  - {fileID: 11400000, guid: 2f362d8700afdd9418cd2a6e118062ef, type: 2}
+  - {fileID: 11400000, guid: 90af55ddb1d4b9c4598dfc1e55b0bb4a, type: 2}
+  - {fileID: 11400000, guid: eaaf6268559d3f94eb95695b900883e9, type: 2}
+  - {fileID: 11400000, guid: 640faa272bf32204aa75513c5b452040, type: 2}
+  - {fileID: 11400000, guid: f362251d2d4c15641a2914c42c59a018, type: 2}
+  - {fileID: 11400000, guid: ad9d2faad22e9df45bca176e666b05f5, type: 2}
 --- !u!4 &1958680348
 Transform:
   m_ObjectHideFlags: 0

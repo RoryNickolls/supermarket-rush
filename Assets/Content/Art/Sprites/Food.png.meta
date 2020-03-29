@@ -820,7 +820,7 @@ TextureImporter:
     second: Food_271
   - first:
       213: 5952763988886912824
-    second: Food_272
+    second: orange
   - first:
       213: -644328898673118582
     second: Food_273
@@ -835,7 +835,7 @@ TextureImporter:
     second: Food_276
   - first:
       213: 2111402442954616619
-    second: eprsimon
+    second: persimmon
   - first:
       213: 8932397601325272954
     second: pomegranate
@@ -955,7 +955,7 @@ TextureImporter:
     second: kiwi
   - first:
       213: -6360199526472704279
-    second: Food_317
+    second: blueberry
   - first:
       213: 7107406692128518106
     second: Food_318
@@ -7424,7 +7424,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Food_272
+      name: orange
       rect:
         serializedVersion: 2
         x: 264
@@ -7529,7 +7529,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: eprsimon
+      name: persimmon
       rect:
         serializedVersion: 2
         x: 391
@@ -8369,7 +8369,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Food_317
+      name: blueberry
       rect:
         serializedVersion: 2
         x: 495
