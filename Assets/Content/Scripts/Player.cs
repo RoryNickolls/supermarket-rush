@@ -21,7 +21,13 @@ public class Player : MonoBehaviour
     private float driftBoost = 15f;
 
     [SerializeField]
+    private AudioClip moveClip;
+
+    [SerializeField]
     private AudioClip crashClip;
+
+    [SerializeField]
+    private AudioClip driftClip;
 
     [SerializeField]
     private Trolley trolley;
@@ -58,12 +64,14 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             trolley.StartDrifting();
+            audioSource.clip = driftClip;
             isDrifting = true;
         }
 
         if (Input.GetKeyUp(KeyCode.Space))
         {
             trolley.StopDrifting();
+            audioSource.clip = moveClip;
             isDrifting = false;
 
             trolleyRb.AddForce(transform.up * driftBoost, ForceMode2D.Impulse);
