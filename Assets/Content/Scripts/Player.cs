@@ -20,6 +20,8 @@ public class Player : MonoBehaviour
     [SerializeField]
     private float driftBoost = 15f;
 
+    private float driftTime = 0.0f;
+
     [SerializeField]
     private AudioClip moveClip;
 
@@ -83,13 +85,18 @@ public class Player : MonoBehaviour
             isDrifting = true;
         }
 
+        if(isDrifting)
+        {
+            driftTime += Time.deltaTime;
+        }
+
         if (Input.GetKeyUp(KeyCode.Space))
         {
             trolley.StopDrifting();
             audioSource.clip = moveClip;
             isDrifting = false;
-
-            trolleyRb.AddForce(transform.up * driftBoost, ForceMode2D.Impulse);
+            trolleyRb.AddForce(transform.up * driftBoost * Mathf.Min((driftTime / 3.0f), 1.0f), ForceMode2D.Impulse);
+            driftTime = 0.0f;
         }
     }
 
