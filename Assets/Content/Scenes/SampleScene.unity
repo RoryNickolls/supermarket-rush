@@ -16949,7 +16949,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 874d3ce52c772bd47ac5d4cdf47fd0ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pushForce: 12
+  pushForce: 15
   turnForce: 8
   brakeForce: 7
   driftMultiplier: 0.5
