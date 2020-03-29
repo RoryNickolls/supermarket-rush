@@ -103,7 +103,7 @@ public class Player : MonoBehaviour
     private void CheckNearbyItems()
     {
 
-        Collider2D[] foods = Physics2D.OverlapCircleAll(transform.position, 2f, LayerMask.GetMask("Food"));
+        Collider2D[] foods = Physics2D.OverlapCircleAll(transform.position, 3f, LayerMask.GetMask("Food"));
 
         if (foods.Length > 0)
         {
@@ -178,6 +178,6 @@ public class Player : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        Gizmos.DrawWireSphere(transform.position, 2f);
+        Gizmos.DrawWireSphere(transform.position, 3f);
     }
 }
