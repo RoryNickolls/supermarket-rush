@@ -20,6 +20,7 @@ public class GameController : MonoBehaviour
 
     public void StartGame()
     {
+        FindObjectOfType<ShoppingList>().Create(3);
         gameTimer.enabled = true;
         started = true;
     }
