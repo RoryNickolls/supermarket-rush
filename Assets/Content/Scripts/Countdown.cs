@@ -13,6 +13,12 @@ public class Countdown : MonoBehaviour
     [SerializeField]
     private UnityEvent onFinish;
 
+    [SerializeField]
+    private AudioClip shortBlip;
+
+    [SerializeField]
+    private AudioClip longBlip;
+
     private int remaining;
     private float countdownTimer = 0.0f;
 
@@ -71,5 +77,14 @@ public class Countdown : MonoBehaviour
             yield return null;
         }
         Camera.main.GetComponent<CameraShake>().IsShaking = true;
+
+        if(remaining == 0)
+        {
+            GetComponent<AudioSource>().PlayOneShot(longBlip);
+        }
+        else
+        {
+            GetComponent<AudioSource>().PlayOneShot(shortBlip);
+        }
     }
 }
