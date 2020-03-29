@@ -472,13 +472,13 @@ TextureImporter:
     second: carrot
   - first:
       213: 8434720189953581588
-    second: Food_156
+    second: turnip
   - first:
       213: -6283108616278150674
     second: Food_157
   - first:
       213: -8730772660078042305
-    second: Food_158
+    second: aubergine
   - first:
       213: 5552418666575263392
     second: Food_159
@@ -652,7 +652,7 @@ TextureImporter:
     second: fish
   - first:
       213: 8518342296844458497
-    second: Food_216
+    second: peas
   - first:
       213: 1467078235070511528
     second: Food_217
@@ -700,7 +700,7 @@ TextureImporter:
     second: Food_231
   - first:
       213: -2011576298776453486
-    second: Food_232
+    second: mushroom
   - first:
       213: -2564334354774783171
     second: Food_233
@@ -4988,7 +4988,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Food_156
+      name: turnip
       rect:
         serializedVersion: 2
         x: 293
@@ -5030,7 +5030,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Food_158
+      name: aubergine
       rect:
         serializedVersion: 2
         x: 338
@@ -6248,7 +6248,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Food_216
+      name: peas
       rect:
         serializedVersion: 2
         x: 261
@@ -6584,7 +6584,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Food_232
+      name: mushroom
       rect:
         serializedVersion: 2
         x: 378

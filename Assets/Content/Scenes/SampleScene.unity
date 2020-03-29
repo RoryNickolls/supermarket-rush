@@ -286,6 +286,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Shelf (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 7882869646678039435, guid: 16e0b719d1caecf4e8f505a645904e46,
+        type: 3}
+      propertyPath: itemGroup
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 16e0b719d1caecf4e8f505a645904e46, type: 3}
 --- !u!1 &825197794
@@ -17284,6 +17289,19 @@ MonoBehaviour:
   - {fileID: 11400000, guid: eec865a6c454cd241ac039ea6f1d1f96, type: 2}
   - {fileID: 11400000, guid: e1535cb71a72cc749ad993e2e08e838b, type: 2}
   - {fileID: 11400000, guid: 2a502acf9d7d07e428de645fc8a4bfec, type: 2}
+  - {fileID: 11400000, guid: 3c7d20f02a74db34a8207937cf84ef25, type: 2}
+  - {fileID: 11400000, guid: cfd496b98fc8d784f8b214a1103732b1, type: 2}
+  - {fileID: 11400000, guid: 7a8125fb9ad86ca43b8f3d3229187889, type: 2}
+  - {fileID: 11400000, guid: 0451665ccb48896428d20f3bc2c95b3b, type: 2}
+  - {fileID: 11400000, guid: 2ea89ff6f0b114141a88493ab855b048, type: 2}
+  - {fileID: 11400000, guid: 357b6cbe0c2b83d42988c060e6d43aba, type: 2}
+  - {fileID: 11400000, guid: 0264be03e50fc034e96ddaa5fce40502, type: 2}
+  - {fileID: 11400000, guid: f427e19e525184b49853c4584454ca9b, type: 2}
+  - {fileID: 11400000, guid: 474b141c3c481f94dba25721ff68a181, type: 2}
+  - {fileID: 11400000, guid: 45904e874e5011548865c258b29b91bc, type: 2}
+  - {fileID: 11400000, guid: 54c5e6a3843878e44bd6bd92faf34ce5, type: 2}
+  - {fileID: 11400000, guid: 472a2eaa570839b4d9130b52284bd2a2, type: 2}
+  - {fileID: 11400000, guid: fcb7234594991094c9522310b31cc58e, type: 2}
 --- !u!4 &1958680348
 Transform:
   m_ObjectHideFlags: 0
