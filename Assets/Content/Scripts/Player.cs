@@ -132,7 +132,7 @@ public class Player : MonoBehaviour
                 // Get food in radius of player 'person'
                 Destroy(closestItem.GetComponent<Collider2D>());
                 trolley.AddItem(closestItem.gameObject);
-                trolleyRb.mass += 0.01f;
+                //trolleyRb.mass += 0.01f;
 
                 AudioManager.PlayOnce(pickUpClip);
 
