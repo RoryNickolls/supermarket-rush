@@ -11,14 +11,12 @@ public class Shelf : MonoBehaviour
 
     private Transform[] itemPositions;
 
-    private void Start()
+    private void Awake()
     {
         itemPositions = GetComponentsInChildren<Transform>();
-
-        SpawnItems();
     }
 
-    private void SpawnItems()
+    public void SpawnItems()
     {
         foreach(Transform pos in itemPositions)
         {

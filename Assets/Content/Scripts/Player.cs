@@ -131,7 +131,7 @@ public class Player : MonoBehaviour
             {
                 // Get food in radius of player 'person'
                 Destroy(closestItem.GetComponent<Collider2D>());
-                trolley.AddItem(closestItem.gameObject);
+                trolley.AddItem(closestItem);
                 //trolleyRb.mass += 0.01f;
 
                 AudioManager.PlayOnce(pickUpClip);
@@ -174,10 +174,30 @@ public class Player : MonoBehaviour
     {
         AudioManager.PlayOnce(crashClip);
         Camera.main.GetComponent<CameraShake>().Shake();
+
+
+        if(collision.gameObject.GetComponent<NPC>() != null)
+        {
+            NPC npc = collision.gameObject.GetComponent<NPC>();
+            npc.Stun();
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.gameObject.CompareTag("FinishLine"))
+        {
+            gameController.CrossFinishLine();
+        }
     }
 
     private void OnDrawGizmos()
     {
         Gizmos.DrawWireSphere(transform.position, 3f);
+    }
+
+    public Trolley Trolley
+    {
+        get { return trolley; }
     }
 }

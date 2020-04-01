@@ -14,8 +14,15 @@ public class GameTimer : MonoBehaviour
 
     private float timer = 0.0f;
 
+    private bool paused = false;
+
     private void Update()
     {
+        if(paused)
+        {
+            return;
+        }
+
         // Every second
         timer += Time.deltaTime;
         if(HasTimeLeft && timer >= 1.0f)
@@ -35,6 +42,11 @@ public class GameTimer : MonoBehaviour
     private void OnValidate()
     {
         UpdateGameTime();
+    }
+
+    public void Pause()
+    {
+        paused = !paused;
     }
 
 

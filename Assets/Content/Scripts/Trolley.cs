@@ -1,10 +1,16 @@
 ﻿using UnityEngine;
-using System.Collections;
+using System.Collections.Generic;
 
 public class Trolley : MonoBehaviour
 {
+
+    private Dictionary<ItemData, int> items;
     private TrailRenderer[] trails;
 
+    private void Awake()
+    {
+        items = new Dictionary<ItemData, int>();
+    }
 
     private void Start()
     {
@@ -29,9 +35,23 @@ public class Trolley : MonoBehaviour
         }
     }
 
-    public void AddItem(GameObject obj)
+    public void AddItem(Item item)
     {
-        obj.transform.SetParent(transform);
-        obj.transform.localPosition = new Vector3(Random.Range(-0.5f, 0.5f), Random.Range(1f, 3f), 0f);
+        item.transform.SetParent(transform);
+        item.transform.localPosition = new Vector3(Random.Range(-0.5f, 0.5f), Random.Range(1f, 3f), 0f);
+
+        if(items.ContainsKey(item.Data))
+        {
+            items[item.Data] += 1;
+        }
+        else
+        {
+            items.Add(item.Data, 1);
+        }
+    }
+
+    public Dictionary<ItemData, int> Items
+    {
+        get { return items; }
     }
 }

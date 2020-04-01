@@ -15,10 +15,6 @@ public class ShoppingList : MonoBehaviour
         shoppingList = new Dictionary<ItemData, int>();
     }
 
-    private void Start()
-    {
-    }
-
     public void Create(int count)
     {
         // Add items to shopping list
@@ -52,5 +48,10 @@ public class ShoppingList : MonoBehaviour
 
             yOffset += shoppingListItemPrefab.GetComponent<RectTransform>().rect.height;
         }
+    }
+
+    public Dictionary<ItemData, int> Items
+    {
+        get { return shoppingList; }
     }
 }
