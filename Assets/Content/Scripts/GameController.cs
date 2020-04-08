@@ -73,13 +73,14 @@ public class GameController : MonoBehaviour
         started = true;
     }
 
-    public void LoseGame()
+    public void LoseGame(string message)
     {
-        uiController.ShowLose();
+        uiController.ShowLose(message);
         Camera.main.GetComponent<CameraShake>().Shake(1.0f, 0.5f);
         started = false;
 
         AudioManager.PlayOnce(loseClip);
+        RestartLevel();
     }
 
     public void WinGame()
@@ -111,9 +112,9 @@ public class GameController : MonoBehaviour
         Dictionary<ItemData, int> target = shoppingList.Items;
 
         bool win = true;
-        foreach(ItemData item in target.Keys)
+        foreach(ItemData item in playerItems.Keys)
         {
-            if(!playerItems.ContainsKey(item) || playerItems[item] < target[item])
+            if(!target.ContainsKey(item) || playerItems[item] != target[item])
             {
                 win = false;
                 break;
@@ -126,13 +127,18 @@ public class GameController : MonoBehaviour
         }
         else
         {
-            LoseGame();
+            LoseGame("WRONG ITEMS!");
         }
     }
 
     public void NextLevel(float delay)
     {
         StartCoroutine(ChangeLevel(currentLevel+1, delay));
+    }
+
+    public void RestartLevel()
+    {
+        StartCoroutine(ChangeLevel(currentLevel, 3f));
     }
 
     public bool HasStarted

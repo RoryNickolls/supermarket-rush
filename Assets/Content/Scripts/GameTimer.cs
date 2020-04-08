@@ -34,7 +34,7 @@ public class GameTimer : MonoBehaviour
 
         if(!HasTimeLeft)
         {
-            GameController.Instance.LoseGame();
+            GameController.Instance.LoseGame("OUT OF TIME!");
             enabled = false;
         }
     }

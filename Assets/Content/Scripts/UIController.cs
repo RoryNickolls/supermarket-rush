@@ -10,9 +10,10 @@ public class UIController : MonoBehaviour
     [SerializeField]
     private GameObject winPrefab;
 
-    public void ShowLose()
+    public void ShowLose(string message)
     {
-        Instantiate(losePrefab, transform);
+        GameObject lose = Instantiate(losePrefab, transform);
+        lose.GetComponent<Text>().text = message;
     }
 
     public void ShowWin()
