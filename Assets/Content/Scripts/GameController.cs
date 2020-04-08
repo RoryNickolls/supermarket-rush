@@ -5,20 +5,15 @@ using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
+    public static GameController Instance;
+
     private GameTimer gameTimer;
     private bool started = false;
 
-    [SerializeField]
-    private string nextScene;
+    private int currentLevel = 0;
 
     [SerializeField]
     private int shoppingListItems = 3;
-
-    [SerializeField]
-    private GameObject lose;
-
-    [SerializeField]
-    private GameObject win;
 
     [SerializeField]
     private AudioClip winClip;
@@ -30,19 +25,46 @@ public class GameController : MonoBehaviour
 
     private ShoppingList shoppingList;
 
-    private void Start()
+    [SerializeField]
+    private UIController gameCanvasPrefab;
+
+    private UIController uiController;
+
+    private void Awake()
     {
+        Instance = this;
+    }
+
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += StartLevel;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= StartLevel;
+    }
+
+    public void StartLevel(Scene scene, LoadSceneMode mode)
+    {
+        if(scene.name == "Menu")
+        {
+            return;
+        }
+
+        uiController = Instantiate(gameCanvasPrefab);
+
         gameTimer = FindObjectOfType<GameTimer>();
 
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
 
-        foreach(Shelf shelf in FindObjectsOfType<Shelf>())
+        foreach (Shelf shelf in FindObjectsOfType<Shelf>())
         {
             shelf.SpawnItems();
         }
 
         shoppingList = FindObjectOfType<ShoppingList>();
-        shoppingList.Create(shoppingListItems);
+        shoppingList.Create(currentLevel + 1);
     }
 
     public void StartGame()
@@ -53,7 +75,7 @@ public class GameController : MonoBehaviour
 
     public void LoseGame()
     {
-        lose.SetActive(true);
+        uiController.ShowLose();
         Camera.main.GetComponent<CameraShake>().Shake(1.0f, 0.5f);
         started = false;
 
@@ -62,7 +84,7 @@ public class GameController : MonoBehaviour
 
     public void WinGame()
     {
-        win.SetActive(true);
+        uiController.ShowWin();
         Camera.main.GetComponent<CameraShake>().Shake(1.0f, 0.5f);
         started = false;
 
@@ -70,16 +92,14 @@ public class GameController : MonoBehaviour
 
         AudioManager.PlayOnce(winClip);
 
-        StartCoroutine(ChangeLevel(nextScene));
+        NextLevel(4f);
     }
 
-    private IEnumerator ChangeLevel(string level)
+    private IEnumerator ChangeLevel(int level, float delay)
     {
-        if(level != "")
-        {
-            yield return new WaitForSeconds(4f);
-            SceneManager.LoadScene(nextScene);
-        }
+        yield return new WaitForSeconds(delay);
+        SceneManager.LoadScene("Level"+level);
+        currentLevel = level;
     }
 
     public void CrossFinishLine()
@@ -108,6 +128,11 @@ public class GameController : MonoBehaviour
         {
             LoseGame();
         }
+    }
+
+    public void NextLevel(float delay)
+    {
+        StartCoroutine(ChangeLevel(currentLevel+1, delay));
     }
 
     public bool HasStarted

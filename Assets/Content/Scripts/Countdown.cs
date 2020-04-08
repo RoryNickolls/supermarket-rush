@@ -11,9 +11,6 @@ public class Countdown : MonoBehaviour
     private int countdownSeconds;
 
     [SerializeField]
-    private UnityEvent onFinish;
-
-    [SerializeField]
     private AudioClip shortBlip;
 
     [SerializeField]
@@ -52,7 +49,7 @@ public class Countdown : MonoBehaviour
         if(remaining == 0)
         {
             countdownText.text = "GO!";
-            onFinish.Invoke();
+            GameController.Instance.StartGame();
             Destroy(gameObject, 1.0f);
         }
         else
