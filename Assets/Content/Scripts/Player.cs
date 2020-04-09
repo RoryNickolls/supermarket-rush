@@ -6,6 +6,9 @@ public class Player : MonoBehaviour
 {
 
     [SerializeField]
+    private int playerNumber = 1;
+
+    [SerializeField]
     private float pushForce;
 
     [SerializeField]
@@ -68,7 +71,7 @@ public class Player : MonoBehaviour
     private void HandleMovement()
     {
         float stopping = 0.1f;
-        float vInput = Input.GetAxis("Vertical");
+        float vInput = Input.GetAxis("Vertical" + playerNumber.ToString());
         if (vInput >= stopping && !audioSource.isPlaying)
         {
             audioSource.Play();
@@ -78,7 +81,7 @@ public class Player : MonoBehaviour
             audioSource.Stop();
         }
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetButtonDown("Brake" + playerNumber.ToString()))
         {
             trolley.StartDrifting();
             audioSource.clip = driftClip;
@@ -90,7 +93,7 @@ public class Player : MonoBehaviour
             driftTime += Time.deltaTime;
         }
 
-        if (Input.GetKeyUp(KeyCode.Space))
+        if (Input.GetButtonUp("Brake" + playerNumber.ToString()))
         {
             trolley.StopDrifting();
             audioSource.clip = moveClip;
@@ -127,7 +130,7 @@ public class Player : MonoBehaviour
             closestItem = closest;
             closestItem.Highlight();
 
-            if (Input.GetKeyDown(KeyCode.E))
+            if (Input.GetButtonDown("Interact" + playerNumber.ToString()))
             {
                 // Get food in radius of player 'person'
                 Destroy(closestItem.GetComponent<Collider2D>());
@@ -157,7 +160,7 @@ public class Player : MonoBehaviour
             return;
         }
 
-        Vector3 movement = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+        Vector3 movement = new Vector3(Input.GetAxis("Horizontal" + playerNumber.ToString()), Input.GetAxis("Vertical" + playerNumber.ToString()));
 
         float tempPushForce = movement.y < 0 ? brakeForce : pushForce;
 

@@ -12,6 +12,8 @@ public class GameController : MonoBehaviour
 
     private int currentLevel = 0;
 
+    private bool together = false;
+
     [SerializeField]
     private int shoppingListItems = 3;
 
@@ -55,6 +57,18 @@ public class GameController : MonoBehaviour
         uiController = Instantiate(gameCanvasPrefab);
 
         gameTimer = FindObjectOfType<GameTimer>();
+
+        if(together)
+        {
+            GameObject together = GameObject.Find("Together");
+            if (together != null)
+            {
+                foreach (Transform transform in together.GetComponentsInChildren<Transform>(true))
+                {
+                    transform.gameObject.SetActive(true);
+                }
+            }
+        }
 
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
 
@@ -144,5 +158,15 @@ public class GameController : MonoBehaviour
     public bool HasStarted
     {
         get { return started; }
+    }
+
+    public bool Together
+    {
+        get { return together; }
+    }
+
+    public void EnablePlayTogether()
+    {
+        together = true;
     }
 }
