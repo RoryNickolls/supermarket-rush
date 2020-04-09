@@ -32,6 +32,8 @@ public class GameController : MonoBehaviour
 
     private UIController uiController;
 
+    private int crossedFinishLine = 0;
+
     private void Awake()
     {
         Instance = this;
@@ -83,6 +85,7 @@ public class GameController : MonoBehaviour
 
     public void StartGame()
     {
+        crossedFinishLine = 0;
         gameTimer.enabled = true;
         started = true;
     }
@@ -122,28 +125,79 @@ public class GameController : MonoBehaviour
         if (!started)
             return;
 
-        Dictionary<ItemData, int> playerItems = player.Trolley.Items;
-        Dictionary<ItemData, int> target = shoppingList.Items;
+        crossedFinishLine++;
 
-        bool win = true;
-        foreach(ItemData item in playerItems.Keys)
+        if(!together || crossedFinishLine == 2)
         {
-            if(!target.ContainsKey(item) || playerItems[item] != target[item])
+            if (EvaluateWin())
             {
-                win = false;
-                break;
+                WinGame();
+            }
+            else
+            {
+                LoseGame("WRONG ITEMS!");
             }
         }
-
-        if(win)
-        {
-            WinGame();
-        }
-        else
-        {
-            LoseGame("WRONG ITEMS!");
-        }
     }
+
+    private bool EvaluateWin()
+    {
+        if(together && crossedFinishLine == 2)
+        {
+            Player[] players = FindObjectsOfType<Player>();
+
+            // Evaluate multiplayer win, same as singleplayer win but items can be split across players
+            Dictionary<ItemData, int> target = shoppingList.Items;
+
+            Dictionary<ItemData, int> totalItems = new Dictionary<ItemData, int>();
+            foreach (Player player in players)
+            {
+                foreach (ItemData key in player.Trolley.Items.Keys)
+                {
+                    if (totalItems.ContainsKey(key))
+                    {
+                        totalItems[key] += player.Trolley.Items[key];
+                    }
+                    else
+                    {
+                        totalItems.Add(key, 1);
+                    }
+                }
+            }
+
+            // Player must have exactly the items on the list to win
+            foreach (ItemData item in target.Keys)
+            {
+                if (!totalItems.ContainsKey(item) || totalItems[item] != target[item])
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+        else if(!together && crossedFinishLine == 1)
+        {
+            // Evaluate singleplayer win
+            Dictionary<ItemData, int> playerItems = player.Trolley.Items;
+            Dictionary<ItemData, int> target = shoppingList.Items;
+
+            // Player must have exactly the items on the list to win
+            foreach (ItemData item in target.Keys)
+            {
+                if (!playerItems.ContainsKey(item) || playerItems[item] != target[item])
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        return false;
+    }
+
+
 
     public void NextLevel(float delay)
     {
